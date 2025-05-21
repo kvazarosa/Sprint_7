@@ -1,8 +1,10 @@
 import requests
 from data import BASE_URL, ORDERS_URL
+import allure
 
 
 class OrderMethods:
+    @allure.step("Создание заказа")
     def create_order(self, color=None):
         order_data = {
             "firstName": "Тест",
@@ -17,5 +19,6 @@ class OrderMethods:
             order_data["color"] = color
         return requests.post(f"{BASE_URL}{ORDERS_URL}", json=order_data)
 
+    @allure.step("Получение заказа")
     def get_orders(self):
         return requests.get(f"{BASE_URL}{ORDERS_URL}")
